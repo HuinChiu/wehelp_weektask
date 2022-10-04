@@ -1,0 +1,174 @@
+body {
+    font-size: 1.25rem;
+    margin: 0px;
+}
+
+.title {
+    font-weight: bold;
+    margin: 5px
+}
+
+.itemgroup {
+    display: flex;
+    justify-content: space-around;
+}
+
+.item {
+    margin: 0px 10px;
+    text-align: center;
+}
+
+.header {
+    font-size: 2.5rem;
+    font-weight: bold;
+    height: 300px;
+    background-color: antiquewhite;
+    margin: 0px 0px 20px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* navbar */
+ul {
+    list-style-type: none;
+    display: block;
+    margin: 0px;
+
+}
+
+li {
+    display: inline;
+    margin: 0px 10px;
+}
+
+.menu-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    align-items: center;
+    justify-content: center;
+}
+
+.list-group {
+    margin: 0px;
+
+}
+
+#toggle {
+    display: none;
+}
+
+.humburger {
+    display: none;
+}
+
+/* content */
+.content {
+    width: 1200px;
+    margin: auto;
+}
+
+/* production */
+.production {
+    margin: 10px 0px;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.production-item {
+    display: flex;
+    width: 49%;
+    height: 50px;
+    background-color: #f7d099;
+}
+
+.production-img {
+    width: 80px;
+    height: auto;
+}
+
+.production-text {
+    text-align: center;
+    margin: auto 5px;
+}
+
+/* item-title */
+
+.item-title-group {
+    height: 100px;
+    margin: 10px 0px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.item-title {
+    display: block;
+    width: 24%;
+    background-color: #f7d099;
+    margin-bottom: 10px;
+
+}
+
+.item-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.item-text {
+    text-align: center;
+    margin: 20;
+}
+
+/* size 600-1200 */
+@media screen and (max-width: 1200px) {
+    .content {
+        width: 90%;
+    }
+
+    .item-title {
+        width: 49%;
+    }
+}
+
+/* size 360-600 */
+@media screen and (max-width: 600px) {
+    .content {
+        width: 90%;
+    }
+
+    .production {
+        flex-wrap: wrap;
+    }
+
+    .production-item {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .item-title {
+        width: 100%;
+    }
+
+    .humburger {
+        display: block;
+    }
+
+    .humimg {
+        width: 30px;
+        height: auto;
+        float: right;
+        margin: 5px;
+    }
+
+    .item {
+        display: none;
+    }
+}

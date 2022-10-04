@@ -95,7 +95,7 @@ twoSum([2, 11, 7, 15], 9)  # show [0, 2] because nums[0]+nums[2] is 9
 
 
 def maxZeros(nums):
-    count = 0   # 記錄目前底幾次出現记录当前元素是第几次连续出现
+    count = 0   # 記錄目前底幾次出現
     maxcount = 0  # 記錄目前出現最大次數
     for i in nums:
         if i == 0:   # 如果i=0
