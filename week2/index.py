@@ -95,7 +95,11 @@ twoSum([2, 11, 7, 15], 9)  # show [0, 2] because nums[0]+nums[2] is 9
 
 
 def maxZeros(nums):
+<<<<<<< HEAD
     count = 0   # 記錄目前底幾次出現
+=======
+    count = 0   # 記錄目前出現幾次
+>>>>>>> 70ff1c7b8e4313e998e08d5236be7699b9289229
     maxcount = 0  # 記錄目前出現最大次數
     for i in nums:
         if i == 0:   # 如果i=0

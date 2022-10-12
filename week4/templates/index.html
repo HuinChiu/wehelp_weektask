@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/templates.css')}}">
+    <title>Assignment - Week 4</title>
+</head>
+
+<body>
+    <header>
+        <div class="title">歡迎光臨，請輸入帳號密碼</div>
+    </header>
+    <section>
+        <div class="sign_in">
+            <div class="sign_title">登入系統</div>
+            <div class="signin_item">
+                <form action="/signin" method="POST">
+                    <div>
+                        <label class="member_id" for="member_id">帳號</label>
+                        <input id="member_id" type="text" name="name">
+                    </div>
+                    <div>
+                        <label class="member_password" for="member_password">密碼</label>
+                        <input id="member_password" type="password" name="password">
+                    </div>
+                    <div class="sign_button">
+                        <button>登入</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+        <hr>
+        <div class="calculate">
+            <div class="calculate_title">計算整數的平方</div>
+            <div class="calculate_item">
+                <form action="/count" , method="POST">
+                    <div>
+                        <label for="calculate_num">正整數</label>
+                        <input type="text" id="calculate_num" name="num">
+                    </div>
+                    <div>
+                        <button>計算</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <footer>
+
+    </footer>
+    <!-- <script src="index.js"></script> -->
+</body>
+
+</html>

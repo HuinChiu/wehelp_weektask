@@ -1,3 +1,4 @@
+# 定義了在複雜世界中幫助開啟URLs (主要是HTTP )的函式和類——基本和摘要認證、重定向、cookies等等，這個模組主要負責構造和發起網路請求
 import urllib.request as request
 import json
 import ssl
@@ -5,7 +6,7 @@ import csv
 ssl._create_default_https_context = ssl._create_unverified_context
 src = "https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json"
 
-with request.urlopen(src) as response:
+with request.urlopen(src) as response:  # 開啟網頁
     data = json.load(response)
     final_list = []
     result_data = data["result"]["results"]
@@ -24,8 +25,6 @@ with request.urlopen(src) as response:
             file_1 = file.split(".jpg")[0]
             file_2 = file_1+".jpg"  # 找出第一筆資料
             list.append(file_2)
-            # my_str = "{},{},{},{},{}.jpg"  # 串接所有資料
-            # final = my_str.format(stitle, address, longitude, latitude, file_1)
 
             final_list.append(list)  # 將串接好資料加入list
 

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/templates.css')}}">
+    <title>Erro</title>
+</head>
+
+<body>
+    <div class="title">
+        失敗頁面
+    </div>
+    <div class="msg">
+        {{message}}
+        <!-- 可將網址輸入字串帶入頁面中 -->
+
+    </div>
+    <div class="home">
+        <a href="/">返回首頁</a>
+    </div>
+
+</body>
+
+</html>

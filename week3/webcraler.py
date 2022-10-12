@@ -16,7 +16,7 @@ def getData(url):
     with req.urlopen(request) as response:  # 抓取電影版網頁原始碼
         data = response.read().decode("utf-8")    # 解析原始碼
 
-    root = bs4.BeautifulSoup(data, "html.parser")  # 讓bs4協助我們解析HTML
+    root = bs4.BeautifulSoup(data, "html.parser")  # 讓bs4協助我們解析HTML，parser解析器
     titles = root.find_all("div", class_="title")  # 尋找class="title"的div標籤
     # print(titles.a.string)  # 找到class=title裡的a的string
     for title in titles:
