@@ -1,10 +1,28 @@
 ##要求二
 1. 建立一個新的資料庫，取名字為 website。
 2. 在資料庫中，建立會員資料表，取名字為 member。資料表必須包含以下欄位設定:
+```sql
+CREATE TABLE member (
+  id bigint NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '獨立編號',
+  name varchar(255) NOT NULL COMMENT '姓名',
+  username varchar(255) NOT NULL COMMENT '帳戶姓名',
+  password varchar(255) NOT NULL COMMENT '帳戶密碼',
+  follower_count int unsigned NOT NULL DEFAULT '0' COMMENT '追蹤者數量',
+  time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '註冊時間'
+) 
+```
 ![要求2](https://github.com/HuinChiu/wehelp_weektask/blob/main/week5/%E5%9F%B7%E8%A1%8C%E9%A0%81%E9%9D%A2%E6%88%AA%E5%9C%96/%E8%A6%81%E6%B1%822.png "要求2")
 
 ##要求三
 * 使用 INSERT 指令新增一筆資料到 member 資料表中，這筆資料的 username 和 password 欄位必須是 test。接著繼續新增至少 4 筆隨意的資料。
+```sql
+INSERT INTO member(name, username, password, follower_count) 
+VALUES ('Marry' 'test' 'test' 10,
+        'paul' 'fast' 'fast' 25,
+        'Lucy' 'funny' 'funny_life' 100,
+        'Nancy' 'hello' 'hello_world' 150 ,
+        'Meggie' 'sweet' 'sweat candy' 350);
+```
 ![要求3-1](https://github.com/HuinChiu/wehelp_weektask/blob/main/week5/%E5%9F%B7%E8%A1%8C%E9%A0%81%E9%9D%A2%E6%88%AA%E5%9C%96/%E8%A6%81%E6%B1%823-1.png "要求3-1")
 * 使用 SELECT 指令取得所有在 member 資料表中的會員資料。
 ![要求3-2](https://github.com/HuinChiu/wehelp_weektask/blob/main/week5/%E5%9F%B7%E8%A1%8C%E9%A0%81%E9%9D%A2%E6%88%AA%E5%9C%96/%E8%A6%81%E6%B1%823-2.png "要求3-2")
