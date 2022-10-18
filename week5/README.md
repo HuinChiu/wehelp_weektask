@@ -45,8 +45,20 @@ VALUES ('Marry' 'test' 'test' 10,
 ![要求4-2](https://github.com/HuinChiu/wehelp_weektask/blob/main/week5/%E5%9F%B7%E8%A1%8C%E9%A0%81%E9%9D%A2%E6%88%AA%E5%9C%96/%E8%A6%81%E6%B1%824-2.png "要求4-2")
 * 取得 member 資料表中，所有會員 follower_count 欄位的平均數。
 ![要求4-3](https://github.com/HuinChiu/wehelp_weektask/blob/main/week5/%E5%9F%B7%E8%A1%8C%E9%A0%81%E9%9D%A2%E6%88%AA%E5%9C%96/%E8%A6%81%E6%B1%824-3.png "要求4-3")
+
 ##要求五
+
 * 在資料庫中，建立新資料表紀錄留言資訊，取名字為 message。資料表中必須包含以下欄位設定:
+```sql
+CREATE TABLE message (
+  id bigint NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '獨立編號',
+  member_id bigint NOT NULL COMMENT '留言者會員編號',
+  content varchar(255) NOT NULL COMMENT '留言內容',
+  like_count int unsigned NOT NULL DEFAULT '0' COMMENT '按讚的數量',
+  time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '留言時間',
+  FOREIGN KEY (member_id) REFERENCES member (id)
+) 
+```
 ![要求5-1](https://github.com/HuinChiu/wehelp_weektask/blob/main/week5/%E5%9F%B7%E8%A1%8C%E9%A0%81%E9%9D%A2%E6%88%AA%E5%9C%96/%E8%A6%81%E6%B1%825-1.png "要求5-1")
 * 使用 SELECT 搭配 JOIN 語法，取得所有留言，結果須包含留言者會員的姓名。
 ![要求5-2](https://github.com/HuinChiu/wehelp_weektask/blob/main/week5/%E5%9F%B7%E8%A1%8C%E9%A0%81%E9%9D%A2%E6%88%AA%E5%9C%96/%E8%A6%81%E6%B1%825-2.png "要求5-2")
