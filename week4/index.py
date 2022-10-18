@@ -8,7 +8,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 # 連線到ＭongoDB雲端資料庫
 client = pymongo.MongoClient(
     "mongodb+srv://root:root123@mycluster.nfytqra.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=certifi.where())
-# 選擇操作menber_system資料庫
+# 選擇操作week4資料庫
 db = client.week4
 print("連線成功")
 
@@ -21,17 +21,18 @@ app = Flask(
 )
 # 設定Session的密鑰
 app.secret_key = "any string but secret"
+
 # 處理路由
 
 
 @app.route("/")  # 首頁
 def index():
-    return render_template("index.html")
+    return render_template("index.html")  # 使用靜態模板
 
 
 @app.route("/menber")  # 會員頁
 def menber():
-    if "menber_name" in session:
+    if "menber_name" in session:  # 確認會員是否有在session裡
         return render_template("menber.html")
     else:
         return redirect("/")
