@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/templates.css')}}">
+    <title>Assignment - Week 6</title>
+</head>
+
+<body>
+    <header>
+        <div class="title">歡迎光臨，請註冊登入系統</div>
+    </header>
+    <section>
+        <div class="sign_up">
+            <div class="sign_title">註冊系統</div>
+            <div class="signup_item">
+                <form action="/signup" method="POST">
+                    <div>
+                        <label class="member_name" for="member_name">姓名</label>
+                        <input id="member_name" type="text" name="name">
+                    </div>
+                    <div>
+                        <label class="member_id" for="member_id">帳號</label>
+                        <input id="member_id" type="text" name="id">
+                    </div>
+                    <div>
+                        <label class="member_password" for="member_password">密碼</label>
+                        <input id="member_password" type="password" name="password">
+                    </div>
+                    <div class="signup_button">
+                        <button>註冊</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+        <hr>
+        <div class="sign_in">
+            <div class="sign_title">登入系統</div>
+            <div class="signin_item">
+                <form action="/signin" method="POST">
+                    <div>
+                        <label class="sign_id" for="sign_id">帳號</label>
+                        <input id="sign_id" type="text" name="sign_id">
+                    </div>
+                    <div>
+                        <label class="sign_password" for="sign_password">密碼</label>
+                        <input id="sign_password" type="password" name="sign_password">
+                    </div>
+                    <div class="signin_button">
+                        <button>登入</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+        <hr>
+    </section>
+    <footer>
+
+    </footer>
+    <!-- <script src="index.js"></script> -->
+</body>
+
+</html>
