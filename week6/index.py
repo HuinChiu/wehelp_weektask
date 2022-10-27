@@ -121,23 +121,17 @@ def signin():
     # 找尋是否有此密碼及帳號
     cursor = connection.cursor()
     query = (
-        "SELECT member_id, password from members WHERE member_id= %s and password= %s;")
+        "SELECT name,member_id, password from members WHERE member_id= %s and password= %s;")
     member = (sign_id, sign_password)
     cursor.execute(query, member)
     data = cursor.fetchone()
     # 找不到對應的資料，登入失敗，到錯誤頁面
-    if data == None:
+    if data[1] == None or data[2] == None:
         return redirect("/error?msg=帳號、或密碼輸入錯誤")
     else:
         # 登入成功，在session紀錄會員資訊，導向會員頁面
         session["member_id"] = sign_id
-        # 找尋會員name
-        sql = ("SELECT name FROM members "
-               "WHERE member_id = %s")
-        cursor.execute(sql, (sign_id,))
-        member_name = cursor.fetchone()
-        name = member_name[0]
-        session["name"] = name  # 將姓名加入至session以取得會員姓名
+        session["name"] = data[0]  # 將姓名加入至session以取得會員姓名
         connection.close()
         return redirect("/member")
 
