@@ -57,16 +57,10 @@ def member():
 
 @app.route("/message", methods=["POST"])
 def message():
-    member_id = session["member_id"]  # 找出member帳號
     content = request.form["message"]  # 接收表單數據
+    id = session["id"]
     connection.reconnect()
     cursor = connection.cursor()
-    sql_member_id = (
-        "SELECT id FROM members WHERE member_id =%s;")  # sql找出會員id
-    cursor.execute(sql_member_id, (member_id,))
-    result_id = cursor.fetchone()
-    id = result_id[0]  # 將資料取出
-
     sql = ("INSERT INTO message(member_id,content) "  # 添加到資料庫
            "VALUES (%s, %s);")
     member_message = (id, content)
@@ -81,8 +75,7 @@ def signup():
     member_name = request.form["name"]  # 取得表單name
     member_id = request.form["id"]  # 取得表單帳號
     password = request.form["password"]  # 取得表單密碼
-    # 根據接受到的資料做驗證
-    # 檢查是否有相同帳號的資料
+    # 根據接受到的資料做驗證檢查是否有相同帳號的資料
     if member_name == "" or member_id == "" or password == "":  # 如果有任一輸入為空返回錯誤訊息
         return redirect("/error?msg=請重新輸入註冊姓名、帳號、密碼不可為空")
     # 重新連接資料庫
@@ -121,17 +114,18 @@ def signin():
     # 找尋是否有此密碼及帳號
     cursor = connection.cursor()
     query = (
-        "SELECT name,member_id, password from members WHERE member_id= %s and password= %s;")
+        "SELECT * from members WHERE member_id= %s and password= %s;")
     member = (sign_id, sign_password)
     cursor.execute(query, member)
     data = cursor.fetchone()
     # 找不到對應的資料，登入失敗，到錯誤頁面
-    if data[1] == None or data[2] == None:
+    if data == None:
         return redirect("/error?msg=帳號、或密碼輸入錯誤")
     else:
         # 登入成功，在session紀錄會員資訊，導向會員頁面
         session["member_id"] = sign_id
         session["name"] = data[0]  # 將姓名加入至session以取得會員姓名
+        session["id"] = data[3]
         connection.close()
         return redirect("/member")
 
@@ -141,6 +135,7 @@ def signout():
     # 移除session中的會員資訊
     del session["member_id"]
     del session["name"]
+    del session["id"]
     return redirect("/")  # 返回首頁
 
 
