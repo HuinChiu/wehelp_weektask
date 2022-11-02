@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/templates.css')}}">
+    <title>會員頁面</title>
+</head>
+
+<body>
+    <div class="title">
+        歡迎光臨，這是會員頁
+    </div>
+    <div class="msg" id="show_name">
+        {{name}}，歡迎您登入系統
+    </div>
+    <div class="home">
+        <a href="/signout">登出系統</a>
+    </div>
+    <hr>
+    <div class="message_block">
+        <div class="msg">
+            <label for="username">查詢會員姓名</label>
+        </div>
+        <input type="text" name="username" id="username">
+        <button onclick="getData();">查詢</button>
+        <div class="result"></div>
+    </div>
+    <hr>
+    <div class="message_block">
+        <div class="msg">
+            <label for="rename">更新我的姓名</label>
+        </div>
+        <input type="text" name="rename" id="rename" placeholder="輸入新的姓名">
+        <button onclick="sendData();">更新</button>
+        <div class="reply"></div>
+
+    </div>
+    <hr>
+    <div class="msg">快來留言吧！</div>
+    <div class="message_block">
+        <form action="/message" method="POST">
+            <label for="message">內容</label>
+            <input type="text" name="message">
+            <div>
+                <button>送出</button>
+            </div>
+        </form>
+    </div>
+    <hr>
+    <div class="message_group">
+        <div>
+            {% for r in result %}
+            <div>{{ r[0] }} : {{ r[1]}}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        function getData() {
+            let value = document.querySelector("#username").value; //取得input值
+            let url = "http://127.0.0.1:3000/api/member?username=" + value; //取得api網址
+            fetch(url).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                name = data["data"].name; //取出姓名
+                return name
+
+            }).then(function (name) {
+                let resultDiv = document.querySelector(".result");//選擇div
+                resultDiv.innerHTML = `${name} (${value})`;//將字串輸入至div
+            })
+
+        }
+        function sendData() {
+            let name = document.querySelector("#rename");
+            let entry = { name: name.value }; //將name放入字典{name:123}
+            let url = "http://127.0.0.1:3000/api/member";//api url
+            fetch(url, {
+                method: "PATCH",
+                body: JSON.stringify(entry),
+                headers: new Headers({
+                    "content-Type": "application/json" //request Header
+                })
+            }).then(function (response) {
+                return response.json()
+            }).then(function (data) {
+                if (data["ok"] === "true") {
+                    let showName = document.querySelector("#show_name");
+                    let newName = document.querySelector("#rename").value; //取得輸入值
+                    showName.innerText = `${newName}，歡迎您登入系統`
+                    let reply = document.querySelector(".reply")
+                    reply.innerHTML = "更新成功"
+                    document.querySelector("#rename").value = "";
+
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
