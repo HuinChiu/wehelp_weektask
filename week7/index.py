@@ -1,4 +1,3 @@
-from wsgiref import headers
 from flask import *
 from flask_cors import CORS
 from mysql.connector import pooling
@@ -56,12 +55,12 @@ def signup():
     # 重新連接資料庫
     connection_obj = connection_pool.get_connection()
     cursor = connection_obj.cursor()  # 使用游標
-    query = ("SELECT member_id FROM members "  # 搜尋member帳號
-             "WHERE member_id = %s")
+    query = ("SELECT username FROM members "  # 搜尋member帳號
+             "WHERE username = %s")
     cursor.execute(query, (member_id,))
     data = cursor.fetchone()
     if data == None:  # 如果沒有找到帳號密碼新增會員資料至資料庫
-        sql = ("INSERT INTO members(name, member_id, password) "
+        sql = ("INSERT INTO members(name, username, password) "
                "VALUES ( %s, %s, %s)")
         member = (member_name, member_id, password)
         cursor.execute(sql, member)
@@ -83,7 +82,7 @@ def signin():
     connection_obj = connection_pool.get_connection()
     cursor = connection_obj.cursor()
     query = (
-        "SELECT * from members WHERE member_id= %s and password= %s;")
+        "SELECT * from members WHERE username= %s and password= %s;")
     member = (sign_id, sign_password)
     cursor.execute(query, member)
     data = cursor.fetchone()
@@ -157,17 +156,16 @@ def api_get():
     if "member_id" in session:
         connection_object = connection_pool.get_connection()
         cursor = connection_object.cursor(dictionary=True)
-        query = "select id,name,member_id from members where member_id= %s;"
+        query = "select id,name,username from members where username= %s;"
         username = request.args.get("username", None)
         cursor.execute(query, (username,))
         record = cursor.fetchone()
         cursor.close()
         connection_object.close()
         result = {"data": record}
-        result = json.dumps(result, ensure_ascii=False, indent=4)
-        return Response(result, mimetype="application/json")
+        return jsonify(result)
     else:
-        return result
+        return jsonify(result)
 
 
 @app.route("/api/member", methods=["PATCH"])
@@ -177,13 +175,11 @@ def api_patch():
         data = request.get_json("name")
         name = data["name"]
         session["name"] = name
-        print(id, name)  # 123 123
         member = (name, id)
         connection_object = connection_pool.get_connection()
         cursor = connection_object.cursor(dictionary=True)
-        query = "UPDATE members SET name =%s WHERE member_id=%s"
+        query = "UPDATE members SET name =%s WHERE username=%s"
         cursor.execute(query, member)
-        print(cursor)
         connection_object.commit()
         cursor.close()
         connection_object.close()
@@ -194,5 +190,6 @@ def api_patch():
 
 
 if __name__ == '__main__':
+    app.config['JSON_AS_ASCII'] = False
     app.debug = True
     app.run(port=3000)

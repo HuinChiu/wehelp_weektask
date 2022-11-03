@@ -64,12 +64,24 @@
             fetch(url).then(function (response) {
                 return response.json();
             }).then(function (data) {
-                name = data["data"].name; //取出姓名
-                return name
+                if (data["data"] === null) {
+                    return null
+                } else {
+                    name = data["data"].name; //取出姓名
+                    return name
+                }
+            }
+            ).then(function (name) {
+                if (name == null) {
+                    let resultDiv = document.querySelector(".result");//選擇div
+                    resultDiv.innerHTML = "查無此會員";
+                }//將字串輸入至div
+                else {
+                    let resultDiv = document.querySelector(".result");//選擇div
+                    resultDiv.innerHTML = `${name} (${value})`;
+                }//將字串輸入至div
 
-            }).then(function (name) {
-                let resultDiv = document.querySelector(".result");//選擇div
-                resultDiv.innerHTML = `${name} (${value})`;//將字串輸入至div
+
             })
 
         }
